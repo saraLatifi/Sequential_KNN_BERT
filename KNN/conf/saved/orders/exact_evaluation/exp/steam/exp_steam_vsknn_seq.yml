@@ -1,0 +1,17 @@
+type: single # single|opt
+key: vsknn_seq #added to the csv names
+evaluation: evaluation_last  #evaluation_last|evaluation_last_sequence
+negative_sampling_mode: False  #True|False
+data:
+  name: steam #added in the end of the csv names
+  folder: data/sequence_aware_datasets/prepared/split_seq/steam/
+  prefix: steam_10_10_50
+
+results:
+  folder: results/exp/exact_evaluation/steam/vsknn_seq_10_10_50/
+
+algorithms:
+# vsknn_seq-k=500-sample_size=10000-weighting=quadratic-weighting_score=div-idf_weighting=10
+- class: knn.vsknn_seq.VMContextKNN
+  params: { sampling: 'random', k: 500, sample_size: 10000, weighting: 'quadratic' , weighting_score: 'div', idf_weighting: 10 }
+  key: vsknn_seq

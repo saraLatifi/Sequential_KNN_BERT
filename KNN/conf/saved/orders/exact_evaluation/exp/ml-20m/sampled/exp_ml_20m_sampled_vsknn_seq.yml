@@ -1,0 +1,17 @@
+type: single # single|opt
+key: vsknn_seq #added to the csv names
+evaluation: evaluation_last  #evaluation_last|evaluation_last_sequence
+negative_sampling_mode: False  #True|False
+data:
+  name: ml_20m_sampled #added in the end of the csv names
+  folder: data/sequence_aware_datasets/prepared/sampled_split_seq/
+  prefix: ml-20m_5_20_20_50
+
+results:
+  folder: results/exp/exact_evaluation/ml-20m_sampled/vsknn_seq_20_20_50/
+
+algorithms:
+# vsknn_seq-retrieve_for_last_n_items=2-sim_last_n=10-sampling=random-k=200-sample_size=5000-weighting=quadratic-weighting_score=same-idf_weighting=5
+- class: knn.vsknn_seq.VMContextKNN
+  params: { retrieve_for_last_n_items: 2, sim_last_n: 10, k: 200, sample_size: 5000, sampling: 'random', weighting: 'quadratic' , weighting_score: 'same', idf_weighting: 5 }
+  key: vsknn_seq

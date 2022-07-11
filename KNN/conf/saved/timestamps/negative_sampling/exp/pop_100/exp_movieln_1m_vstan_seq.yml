@@ -1,0 +1,17 @@
+type: single # single|opt
+key: vstan_seq #added to the csv names
+evaluation: evaluation_last  #evaluation_last|evaluation_last_sequence
+negative_sampling_mode: True  #True|False
+data:
+  name: movieln_1m #added in the end of the csv names
+  folder: data/sequence_aware_datasets/prepared/timestamps/split_seq/ml-1m/
+  prefix: ml-1m_timestamps_25_25_50
+
+results:
+  folder: results/exp/negative_sampling/pop_100/movieln_1m/vstan_seq_25_25_50/
+
+algorithms:
+# vstan-retrieve_for_last_n_items=-1-sim_last_n=3-sampling=common-k=200-sample_size=5000-similarity=cosine-lambda_spw=6.25-lambda_snh=1000-lambda_inh=3.12-lambda_ipw=6.25-lambda_idf=10
+- class: knn.vstan_seq.VSKNN_STAN
+  params: { retrieve_for_last_n_items: -1, sim_last_n: 3, sampling: 'common', k: 200, sample_size: 5000, similarity: 'cosine', lambda_spw: 6.25, lambda_snh: 1000, lambda_inh: 3.12, lambda_ipw: 6.25, lambda_idf: 10 }
+  key: vstan_seq

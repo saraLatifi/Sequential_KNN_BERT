@@ -1,0 +1,17 @@
+type: single # single|opt
+key: vstan_seq #added to the csv names
+evaluation: evaluation_last  #evaluation_last|evaluation_last_sequence
+negative_sampling_mode: False  #True|False
+data:
+  name: ml-20m_sampled #added in the end of the csv names
+  folder: data/sequence_aware_datasets/prepared/timestamps/sampled_split_seq/
+  prefix: ml-20m_timestamps_5_20_20_50
+
+results:
+  folder: results/exp/exact_evaluation/ml-20m_sampled/vstan_seq_20_20_50/
+
+algorithms:
+# vstan_seq-retrieve_for_last_n_items=2-sim_last_n=0-sampling=weighted-k=200-sample_size=5000-similarity=vec-lambda_spw=10-lambda_snh=50000-lambda_inh=40-lambda_ipw=2.5-lambda_idf=10
+- class: knn.vstan_seq.VSKNN_STAN
+  params: { retrieve_for_last_n_items: 2, sim_last_n: 0, sampling: 'weighted', k: 200, sample_size: 5000, similarity: 'vec', lambda_spw: 10, lambda_snh: 50000, lambda_inh: 40, lambda_ipw: 2.5, lambda_idf: 10 }
+  key: vstan_seq

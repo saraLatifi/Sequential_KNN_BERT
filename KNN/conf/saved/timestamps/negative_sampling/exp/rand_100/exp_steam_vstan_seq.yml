@@ -1,0 +1,20 @@
+type: single # single|opt
+key: vstan_seq #added to the csv names
+evaluation: evaluation_last  #evaluation_last|evaluation_last_sequence
+negative_sampling_mode: True  #True|False
+sampling_conf:
+  pop_random: False  # default: True
+  sample_size: 100  # default: 100
+data:
+  name: steam #added in the end of the csv names
+  folder: data/sequence_aware_datasets/prepared/timestamps/split_seq/steam/
+  prefix: steam_timestamps_10_10_50
+
+results:
+  folder: results/exp/negative_sampling/rand_100/steam/vstan_seq_10_10_50/
+
+algorithms:
+# vstan_seq-retrieve_for_last_n_items=3-sim_last_n=7-sampling=recent-k=500-sample_size=2500-similarity=cosine-lambda_spw=11.5-lambda_snh=20000-lambda_inh=23-lambda_ipw=11.5-lambda_idf=10
+- class: knn.vstan_seq.VSKNN_STAN
+  params: { retrieve_for_last_n_items: 3, sim_last_n: 7, sampling: 'recent', k: 500, sample_size: 2500, similarity: 'cosine', lambda_spw: 11.5, lambda_snh: 20000, lambda_inh: 23, lambda_ipw: 11.5, lambda_idf: 10 }
+  key: vstan_seq

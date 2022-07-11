@@ -1,0 +1,17 @@
+type: single # single|opt
+key: vsknn_seq #added to the csv names
+evaluation: evaluation_last  #evaluation_last|evaluation_last_sequence
+negative_sampling_mode: False  #True|False
+data:
+  name: beauty #added in the end of the csv names
+  folder: data/sequence_aware_datasets/prepared/extended_test_set/
+  prefix: beauty_baselines
+
+results:
+  folder: results/exp/exact_evaluation/beauty/vsknn_seq/
+
+algorithms:
+# vsknn_seq-sampling=random-retrieve_for_last_n_items=10-k=1000-sample_size=10000-weighting=linear-weighting_score=div-idf_weighting=10
+- class: knn.vsknn_seq.VMContextKNN
+  params: { sampling: 'random', retrieve_for_last_n_items: 10, k: 1000, sample_size: 10000, weighting: 'linear' , weighting_score: 'div', idf_weighting: 10 }
+  key: vsknn_seq

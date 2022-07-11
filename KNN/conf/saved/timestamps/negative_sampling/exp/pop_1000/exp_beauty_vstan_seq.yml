@@ -1,0 +1,20 @@
+type: single # single|opt
+key: vstan_seq #added to the csv names
+evaluation: evaluation_last  #evaluation_last|evaluation_last_sequence
+negative_sampling_mode: True  #True|False
+sampling_conf:
+  pop_random: True  # default: True
+  sample_size: 1000  # default: 100
+data:
+  name: beauty #added in the end of the csv names
+  folder: data/sequence_aware_datasets/prepared/timestamps/extended_test_set/beauty/
+  prefix: beauty_timestamps_baselines
+
+results:
+  folder: results/exp/negative_sampling/pop_1000/beauty/vstan_seq/
+
+algorithms:
+# vstan-retrieve_for_last_n_items=4-sim_last_n=3-sampling=random-k=1500-sample_size=10000-lambda_spw=2-lambda_snh=50000-lambda_inh=4-lambda_ipw=4-lambda_idf=2
+- class: knn.vstan_seq.VSKNN_STAN
+  params: { retrieve_for_last_n_items: 4, sim_last_n: 3, sampling: 'random', k: 1500, sample_size: 10000, similarity: 'cosine', lambda_spw: 2, lambda_snh: 50000, lambda_inh: 4, lambda_ipw: 4, lambda_idf: 2 }
+  key: vstan_seq
